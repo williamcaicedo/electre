@@ -5,6 +5,9 @@
 
 package org.electre.processors;
 
+import java.util.List;
+import org.electre.core.Atributo;
+
 /**
  *
  * @author william
@@ -34,6 +37,17 @@ public class DecisionMatrixProcessor extends AbstractMatrixProcessor{
              }
         }
 
+        return m;
+    }
+
+    public static double[][] weigh(double[][] m, List<Atributo> attributes){
+        int i = 0;
+        for(Atributo a : attributes) {
+            for (int j = 0; j < m.length; j++) {
+                m[j][i] = m[j][i]*a.getPeso();
+            }
+            i++;
+        }
         return m;
     }
 
