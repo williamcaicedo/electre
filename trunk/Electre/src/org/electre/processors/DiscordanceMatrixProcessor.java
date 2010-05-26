@@ -9,7 +9,7 @@ package org.electre.processors;
  *
  * @author william
  */
-public class DiscordanceMatrixProcessor extends AbstractMatrixProcessor{
+public class DiscordanceMatrixProcessor extends AbstractThresholdMatrixProcessor{
 
     @Override
     public double[][] process(double[][] m) {
@@ -30,17 +30,14 @@ public class DiscordanceMatrixProcessor extends AbstractMatrixProcessor{
                                 max2 = subs;
                             }
                         }
-
                     }
-
                 }
                 discordanceMatrix[i][j] = max/max2;
             }
-
-
         }
         return discordanceMatrix;
     }
+
 
 
 }
