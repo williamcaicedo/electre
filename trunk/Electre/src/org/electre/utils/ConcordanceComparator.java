@@ -11,10 +11,7 @@ package org.electre.utils;
  */
 public class ConcordanceComparator extends AbstractComparator{
 
-    public ConcordanceComparator(ComparatorPolicy policy) {
-        super(policy);
-    }
-
+   
     @Override
     public double compare(double x, double threshold) {
         return (x > threshold)?1:0;
