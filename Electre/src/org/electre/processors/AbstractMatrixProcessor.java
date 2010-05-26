@@ -10,6 +10,7 @@ package org.electre.processors;
  * @author william
  */
 public abstract class AbstractMatrixProcessor {
+    protected double[][] matrix;
 
     public abstract double[][] process(double[][] m);
 }

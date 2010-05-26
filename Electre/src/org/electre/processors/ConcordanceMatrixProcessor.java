@@ -9,7 +9,7 @@ package org.electre.processors;
  *
  * @author william
  */
-public class ConcordanceMatrixProcessor extends AbstractMatrixProcessor {
+public class ConcordanceMatrixProcessor extends AbstractThresholdMatrixProcessor {
 
     @Override
     public double[][] process(double[][] decisionMatrix) {
@@ -25,7 +25,10 @@ public class ConcordanceMatrixProcessor extends AbstractMatrixProcessor {
                 }
             }
         }
+        this.matrix = concordanceMatrix;
         return concordanceMatrix;
     }
+
+   
 
 }
