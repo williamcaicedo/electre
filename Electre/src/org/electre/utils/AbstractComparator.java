@@ -11,10 +11,10 @@ package org.electre.utils;
  */
 public abstract class AbstractComparator {
 
-    protected final ComparatorPolicy policy;
+   
 
-    public AbstractComparator(ComparatorPolicy policy) {
-        this.policy = policy;
+    public AbstractComparator() {
+        
     }
 
     public abstract double compare(double x, double threshold);
