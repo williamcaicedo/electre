@@ -5,6 +5,8 @@
 
 package org.electre;
 
+import org.electre.ui.TestFrame;
+
 /**
  *
  * @author william
@@ -16,6 +18,7 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        new TestFrame().setVisible(true);
     }
 
 }
