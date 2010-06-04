@@ -251,6 +251,10 @@ public class ElectreDialog extends javax.swing.JDialog {
         return tableModel;
     }
 
+    public List<Atributo> getAtributos() {
+        return atributos;
+    }
+
     /**
     * @param args the command line arguments
     */

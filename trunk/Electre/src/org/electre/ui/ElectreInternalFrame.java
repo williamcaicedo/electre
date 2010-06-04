@@ -11,6 +11,18 @@
 
 package org.electre.ui;
 
+import java.util.List;
+import java.util.Vector;
+import org.electre.core.Atributo;
+import org.electre.processors.AggregatedDominanceMatrixProcessor;
+import org.electre.processors.ConcordanceMatrixProcessor;
+import org.electre.processors.ConcordantDominanceMatrixProcessor;
+import org.electre.processors.DecisionMatrixProcessor;
+import org.electre.processors.DiscordanceMatrixProcessor;
+import org.electre.processors.DiscordantDominanceMatrixProcessor;
+import org.electre.utils.ConcordanceComparator;
+import org.electre.utils.DiscordanceComparator;
+import org.electre.utils.GraphSceneImpl;
 import org.electre.utils.MyTableModel;
 
 /**
@@ -21,6 +33,7 @@ import org.electre.utils.MyTableModel;
 public class ElectreInternalFrame extends javax.swing.JInternalFrame {
     
     private MyTableModel model;
+    private List<Atributo> atributos;
     /** Creates new form ElectreInternalFrame */
     public ElectreInternalFrame() {
         initComponents();
@@ -29,6 +42,10 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
     public void setModel(MyTableModel model) {
         this.model = model;
         this.jTable1.setModel(model);
+    }
+
+    public void setAtributos(List<Atributo> atributos) {
+        this.atributos = atributos;
     }
 
 
@@ -47,6 +64,7 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
 
         setClosable(true);
         setIconifiable(true);
@@ -96,15 +114,23 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab(org.openide.util.NbBundle.getMessage(ElectreInternalFrame.class, "ElectreInternalFrame.jPanel1.TabConstraints.tabTitle"), jPanel1); // NOI18N
 
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(ElectreInternalFrame.class, "ElectreInternalFrame.jScrollPane2.border.title"))); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 865, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 845, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 435, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab(org.openide.util.NbBundle.getMessage(ElectreInternalFrame.class, "ElectreInternalFrame.jPanel2.TabConstraints.tabTitle"), jPanel2); // NOI18N
@@ -131,10 +157,34 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+        Vector<Vector> dataVector = ((MyTableModel)this.jTable1.getModel()).getDataVector();
+        double[][] decisionMatrix = new double[dataVector.size()][dataVector.get(0).size()-1];
+        int i = 0;
+        for (Vector row : dataVector) {
+            for (int j = 1; j < row.size(); j++) {
+                decisionMatrix[i][j] = Double.parseDouble((String)row.get(j));
+            }
+        }
+        ConcordanceMatrixProcessor concordanceMatrixProcessor = new ConcordanceMatrixProcessor();
+        double[][] concordanceMatrix = concordanceMatrixProcessor.process(decisionMatrix);
+        double[][] normalizedDecisionMatrix = DecisionMatrixProcessor.normalize(decisionMatrix);
+        double[][] weightedDecisionMatrix = DecisionMatrixProcessor.weigh(normalizedDecisionMatrix, this.atributos);
+        DiscordanceMatrixProcessor discordanceMatrixProcessor = new DiscordanceMatrixProcessor();
+        double[][] discordanceMatrix = discordanceMatrixProcessor.process(weightedDecisionMatrix);
+        ConcordantDominanceMatrixProcessor concordantDominanceMatrixProcessor = new ConcordantDominanceMatrixProcessor(new ConcordanceComparator(),1);
+        double[][] concordantDominanceMatrix = concordantDominanceMatrixProcessor.process(concordanceMatrix);
+        DiscordantDominanceMatrixProcessor discordantDominanceMatrixProcessor = new DiscordantDominanceMatrixProcessor(new DiscordanceComparator(),1);
+        double[][] discordantDominanceMatrix = discordantDominanceMatrixProcessor.process(discordanceMatrix);
+        AggregatedDominanceMatrixProcessor aggregatedDominanceMatrixProcessor = new AggregatedDominanceMatrixProcessor();
+        double[][] aggregatedDominanceMatrix = aggregatedDominanceMatrixProcessor.process(concordantDominanceMatrix, discordantDominanceMatrix);
+        GraphSceneImpl graphScene = new GraphSceneImpl();
+        jScrollPane1.setViewportView(graphScene.createView());
+        graphScene.paintElectreGraph(aggregatedDominanceMatrix);
+
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -142,6 +192,7 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
