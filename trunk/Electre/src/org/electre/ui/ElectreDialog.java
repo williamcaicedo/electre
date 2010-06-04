@@ -14,8 +14,12 @@ package org.electre.ui;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
+import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import org.electre.core.Atributo;
 import org.electre.utils.MyTableModel;
 
 /**
@@ -176,7 +180,7 @@ public class ElectreDialog extends javax.swing.JDialog {
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         // TODO add your handling code here:
-        
+        List<Atributo> atributos = new ArrayList<Atributo>();
         MyTableModel model = new MyTableModel();
         //int i = 1;
         model.addColumn("Alternativas");
@@ -224,6 +228,9 @@ public class ElectreDialog extends javax.swing.JDialog {
         textField.setSize(new Dimension(10,80));
         c.fill = GridBagConstraints.HORIZONTAL;
         this.jPanel6.add(textField, c);
+        c.gridx = 1;
+        JComboBox combo = new JComboBox();
+
     }
 
     public MyTableModel getTableModel() {
