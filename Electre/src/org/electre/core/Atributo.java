@@ -14,18 +14,15 @@ public class Atributo {
     private String nombre;
     private String unidades;
     private double peso;
-    private final boolean positivo;
-    private final double valor;
+    private boolean positivo;
+    private double valor;
 
-    public Atributo(String nombre, String unidades, double peso, boolean positivo, double valor) {
+    public Atributo(String nombre, boolean positivo) {
         this.nombre = nombre;
-        this.unidades = unidades;
-        this.peso = peso;
+        //this.unidades = unidades;
+        //this.peso = peso;
         this.positivo = positivo;
-        if (positivo)
-            this.valor = valor;
-        else
-            this.valor = -valor;
+        
     }
 
     public String getNombre() {
@@ -38,6 +35,33 @@ public class Atributo {
 
     public String getUnidades() {
         return unidades;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
+
+    public void setUnidades(String unidades) {
+        this.unidades = unidades;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+       if (positivo)
+            this.valor = valor;
+        else
+            this.valor = -valor;
+    }
+
+    public boolean isPositivo() {
+        return positivo;
     }
 
 
