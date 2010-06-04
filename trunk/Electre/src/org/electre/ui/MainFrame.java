@@ -11,6 +11,7 @@
 
 package org.electre.ui;
 
+import java.awt.Frame;
 import org.electre.utils.MyTableModel;
 
 /**
@@ -22,6 +23,7 @@ public class MainFrame extends javax.swing.JFrame {
     /** Creates new form MainFrame */
     public MainFrame() {
         initComponents();
+        setExtendedState(Frame.MAXIMIZED_BOTH);
     }
 
     /** This method is called from within the constructor to
@@ -40,10 +42,11 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle(org.openide.util.NbBundle.getMessage(MainFrame.class, "MainFrame.title")); // NOI18N
 
         jDesktopPane1.setBackground(new java.awt.Color(240, 240, 240));
         jDesktopPane1.setForeground(new java.awt.Color(240, 240, 240));
-        getContentPane().add(jDesktopPane1, java.awt.BorderLayout.CENTER);
+        jDesktopPane1.setDragMode(javax.swing.JDesktopPane.OUTLINE_DRAG_MODE);
 
         jMenu1.setText(org.openide.util.NbBundle.getMessage(MainFrame.class, "MainFrame.jMenu1.text")); // NOI18N
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
@@ -66,6 +69,22 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1065, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

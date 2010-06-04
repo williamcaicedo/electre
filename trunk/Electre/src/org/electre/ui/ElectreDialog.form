@@ -29,7 +29,7 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="379" max="32767" attributes="0"/>
-              <Component id="nextButton" min="-2" pref="87" max="-2" attributes="1"/>
+              <Component id="finishButton" min="-2" pref="87" max="-2" attributes="1"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -40,7 +40,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" pref="365" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="nextButton" min="-2" max="-2" attributes="0"/>
+              <Component id="finishButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -211,14 +211,14 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="nextButton">
+    <Component class="javax.swing.JButton" name="finishButton">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="org/electre/ui/Bundle.properties" key="ElectreDialog.nextButton.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+          <ResourceString bundle="org/electre/ui/Bundle.properties" key="ElectreDialog.finishButton.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nextButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="finishButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
