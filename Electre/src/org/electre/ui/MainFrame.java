@@ -12,6 +12,8 @@
 package org.electre.ui;
 
 import java.awt.Frame;
+import java.util.List;
+import org.electre.core.Atributo;
 import org.electre.utils.MyTableModel;
 
 /**
@@ -98,7 +100,9 @@ public class MainFrame extends javax.swing.JFrame {
         ElectreDialog dialog = new ElectreDialog(this,true);
         dialog.setVisible(true);
         MyTableModel tableModel = dialog.getTableModel();
+        List<Atributo> atributos = dialog.getAtributos();
         ElectreInternalFrame frame = new ElectreInternalFrame();
+        frame.setAtributos(atributos);
         frame.setModel(tableModel);
         this.jDesktopPane1.add(frame);
         frame.setVisible(true);
