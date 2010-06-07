@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JComboBox;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import org.electre.core.Atributo;
 import org.electre.utils.MyTableModel;
@@ -36,6 +37,7 @@ public class ElectreDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.jPanel6.setLayout(new GridBagLayout());
+        addComponents();
     }
 
     /** This method is called from within the constructor to
@@ -183,18 +185,24 @@ public class ElectreDialog extends javax.swing.JDialog {
 
     private void finishButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishButtonActionPerformed
         // TODO add your handling code here:
-        List<Atributo> atributos = new ArrayList<Atributo>();
-        MyTableModel model = new MyTableModel();
+        atributos = new ArrayList<Atributo>();
+        tableModel = new MyTableModel();
         //int i = 1;
-        model.addColumn("Alternativas");
+        tableModel.addColumn("Alternativas");
         String name = "";
+        boolean positivo = false;
         for (Component c : jPanel6.getComponents()) {
                 if (c instanceof JTextField) {
-                    model.addColumn(((JTextField)c).getText());
+                    tableModel.addColumn(((JTextField)c).getText());
                     name = ((JTextField)c).getText();
                 }else{
-                    boolean positivo = ((JComboBox)c).getSelectedItem().equals("Mayor es mejor");
-                    atributos.add(new Atributo(name,positivo));
+                    if (c instanceof JComboBox) {
+                        positivo = ((JComboBox)c).getSelectedItem().equals("Mayor es mejor");
+                    }else{
+                        double weight = (Double)((JSpinner)c).getValue();
+                        atributos.add(new Atributo(name,positivo,weight));
+                    }
+                    
                 }
         }
 
@@ -209,21 +217,22 @@ public class ElectreDialog extends javax.swing.JDialog {
                  }
                  j++;
             }
-            model.addRow(v);
+            tableModel.addRow(v);
 
         }
-        this.tableModel = model;
-        this.atributos = atributos;
+        //this.tableModel = model;
+        //this.atributos = atributos;
         this.dispose();
     }//GEN-LAST:event_finishButtonActionPerformed
 
     private void jSpinner2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner2StateChanged
         // TODO add your handling code here:
         Integer value = (Integer) jSpinner2.getValue();
-        if (value > this.jPanel6.getComponentCount()/2) {
+        if (value > this.jPanel6.getComponentCount()/3) {
             this.addComponents();
         }
-        if (value < this.jPanel6.getComponentCount()/2) {
+        if (value < this.jPanel6.getComponentCount()/3) {
+            this.jPanel6.remove(this.jPanel6.getComponentCount() - 1);
             this.jPanel6.remove(this.jPanel6.getComponentCount() - 1);
             this.jPanel6.remove(this.jPanel6.getComponentCount() - 1);
         }
@@ -245,6 +254,10 @@ public class ElectreDialog extends javax.swing.JDialog {
        // DefaultComboBoxModel model = new DefaultComboBoxModel();
         JComboBox combo = new JComboBox(new String[]{"mayor es mejor","menor es mejor"});
         this.jPanel6.add(combo, c);
+        c.gridx = 2;
+        JSpinner spinner = new JSpinner();
+        spinner.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(0.1), Double.valueOf(0.01), Double.valueOf(1), Double.valueOf(0.01)));
+        this.jPanel6.add(spinner, c);
     }
 
     public MyTableModel getTableModel() {

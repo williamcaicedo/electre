@@ -17,10 +17,10 @@ public class Atributo {
     private boolean positivo;
     private double valor;
 
-    public Atributo(String nombre, boolean positivo) {
+    public Atributo(String nombre, boolean positivo, double peso) {
         this.nombre = nombre;
         //this.unidades = unidades;
-        //this.peso = peso;
+        this.peso = peso;
         this.positivo = positivo;
         
     }
@@ -62,6 +62,10 @@ public class Atributo {
 
     public boolean isPositivo() {
         return positivo;
+    }
+
+    public void setPositivo(boolean positivo) {
+        this.positivo = positivo;
     }
 
 

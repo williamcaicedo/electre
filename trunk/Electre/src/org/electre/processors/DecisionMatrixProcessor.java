@@ -20,9 +20,9 @@ public class DecisionMatrixProcessor extends AbstractMatrixProcessor{
     }
 
     public static double[][] normalize(double[][] m) {
-
+        double[][] n = new double[m.length][m[0].length];
         for (int i = 0; i < m.length; i++) {
-            double min = m[0][0];
+            double min = m[0][i];
             double max = min;
             for (int j = 0; j < m[0].length; j++) {
                 if (m[j][i] > max) {
@@ -33,22 +33,23 @@ public class DecisionMatrixProcessor extends AbstractMatrixProcessor{
                 }
             }
              for (int j = 0; j < m[0].length; j++) {
-                 m[j][i] = m[j][i]/(max-min);
+                 n[j][i] = m[j][i]/(max-min);
              }
         }
 
-        return m;
+        return n;
     }
 
     public static double[][] weigh(double[][] m, List<Atributo> attributes){
+        double[][] n = new double[m.length][m[0].length];
         int i = 0;
         for(Atributo a : attributes) {
             for (int j = 0; j < m.length; j++) {
-                m[j][i] = m[j][i]*a.getPeso();
+                n[j][i] = m[j][i]*a.getPeso();
             }
             i++;
         }
-        return m;
+        return n;
     }
 
 }

@@ -5,11 +5,19 @@
 
 package org.electre.processors;
 
+import java.util.List;
+import org.electre.core.Atributo;
+
 /**
  *
  * @author william
  */
 public class ConcordanceMatrixProcessor extends AbstractThresholdMatrixProcessor {
+    private List<Atributo> atributos;
+    public ConcordanceMatrixProcessor(List<Atributo> atributos) {
+        super();
+        this.atributos = atributos;
+    }
 
     @Override
     public double[][] process(double[][] decisionMatrix) {
@@ -19,7 +27,7 @@ public class ConcordanceMatrixProcessor extends AbstractThresholdMatrixProcessor
                 double result = 0;
                 if (i != j) {
                     for (int k = 0; k < decisionMatrix[0].length; k++) {
-                        result += (decisionMatrix[i][k] > decisionMatrix[j][k])?decisionMatrix[i][k]:((decisionMatrix[i][k] < decisionMatrix[j][k])?0:decisionMatrix[i][k]/2);
+                        result += (decisionMatrix[i][k] > decisionMatrix[j][k])?atributos.get(k).getPeso():((decisionMatrix[i][k] < decisionMatrix[j][k])?0:atributos.get(k).getPeso()/2);
                     }
                     concordanceMatrix[i][j] = result;
                 }
