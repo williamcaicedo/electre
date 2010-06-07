@@ -18,6 +18,8 @@ public class DiscordanceMatrixProcessor extends AbstractThresholdMatrixProcessor
         double[][] discordanceMatrix = new double[m.length][m[0].length];
         for (int i = 0; i < m.length;i++) {
             for (int j = 0; j < m.length;j++) {
+                max = 0;
+                max2 = 0;
                 if (i != j) {
                     for (int k = 0; k < m[0].length; k++) {
                          double subs = Math.abs(Math.abs(m[i][k]) - Math.abs(m[j][k]));
@@ -31,8 +33,9 @@ public class DiscordanceMatrixProcessor extends AbstractThresholdMatrixProcessor
                             }
                         }
                     }
-                }
                 discordanceMatrix[i][j] = max/max2;
+                }
+                
             }
         }
         return discordanceMatrix;

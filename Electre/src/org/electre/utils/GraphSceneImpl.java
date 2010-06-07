@@ -17,7 +17,6 @@ import org.netbeans.api.visual.widget.ConnectionWidget;
 import org.netbeans.api.visual.widget.LayerWidget;
 import org.netbeans.api.visual.widget.Scene;
 import org.netbeans.api.visual.widget.Widget;
-import org.netbeans.api.visual.widget.general.IconNodeWidget;
 //import org.neuralStudio.editor.palette.Object;
 
 /**
@@ -35,11 +34,15 @@ public class GraphSceneImpl extends GraphScene {
         this.connectionLayer = new LayerWidget(this);
         this.addChild(this.mainLayer);
         this.addChild(this.connectionLayer);
+        /*
         this.addNode(1);
         this.addNode(2);
         Widget w1 = this.mainLayer.getChildren().get(0);
         Widget w2 = this.mainLayer.getChildren().get(1);
         this.connectNodes(w1, w2);
+         *
+         */
+
         //this.nodeImage = ImageUtilities.loadImage("org/electre/resources/node.jpg");
         /*
         this.getActions().addAction(ActionFactory.createAcceptAction(new AcceptProvider() {
@@ -108,8 +111,12 @@ public class GraphSceneImpl extends GraphScene {
         //widget.setLabel(Long.toString(node.hashCode()));
         //widget.getActions().addAction(ActionFactory.createExtendedConnectAction(this.connectionLayer, new MyConnectProvider()));
         widget.getActions().addAction(ActionFactory.createMoveAction());
-        Integer col = 200*(index/3) + 10;
-        widget.setPreferredLocation(new Point(index*100,col));
+        //Integer col = 200*(index/3) + 10;
+        double area = this.getView().getWidth();
+        double area2 = this.getView().getHeight();
+        int col = (int) Math.round(Math.random()*300);
+        int row = (int) Math.round(Math.random()*600);
+        widget.setPreferredLocation(new Point(row,col));
         mainLayer.addChild(widget);
         return widget;
     }
