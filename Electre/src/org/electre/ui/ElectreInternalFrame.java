@@ -13,6 +13,7 @@ package org.electre.ui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.JFrame;
 import org.electre.core.Atributo;
 import org.electre.processors.AggregatedDominanceMatrixProcessor;
@@ -117,6 +118,8 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTable1.setRowSelectionAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText(org.openide.util.NbBundle.getMessage(ElectreInternalFrame.class, "ElectreInternalFrame.jButton1.text")); // NOI18N
@@ -255,16 +258,12 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 462, Short.MAX_VALUE)
-            .addGap(0, 462, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane5))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 84, Short.MAX_VALUE)
-            .addGap(0, 84, Short.MAX_VALUE)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -292,16 +291,12 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 462, Short.MAX_VALUE)
-            .addGap(0, 462, Short.MAX_VALUE)
-            .addGap(0, 462, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane6))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 84, Short.MAX_VALUE)
-            .addGap(0, 84, Short.MAX_VALUE)
             .addGap(0, 84, Short.MAX_VALUE)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -331,16 +326,12 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 462, Short.MAX_VALUE)
             .addGap(0, 462, Short.MAX_VALUE)
-            .addGap(0, 462, Short.MAX_VALUE)
-            .addGap(0, 462, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane7))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 84, Short.MAX_VALUE)
-            .addGap(0, 84, Short.MAX_VALUE)
             .addGap(0, 84, Short.MAX_VALUE)
             .addGap(0, 84, Short.MAX_VALUE)
             .addGroup(jPanel8Layout.createSequentialGroup()
@@ -372,16 +363,12 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
             .addGap(0, 462, Short.MAX_VALUE)
             .addGap(0, 462, Short.MAX_VALUE)
             .addGap(0, 462, Short.MAX_VALUE)
-            .addGap(0, 462, Short.MAX_VALUE)
-            .addGap(0, 462, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane8))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 84, Short.MAX_VALUE)
-            .addGap(0, 84, Short.MAX_VALUE)
             .addGap(0, 84, Short.MAX_VALUE)
             .addGap(0, 84, Short.MAX_VALUE)
             .addGap(0, 84, Short.MAX_VALUE)
@@ -415,16 +402,12 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
             .addGap(0, 462, Short.MAX_VALUE)
             .addGap(0, 462, Short.MAX_VALUE)
             .addGap(0, 462, Short.MAX_VALUE)
-            .addGap(0, 462, Short.MAX_VALUE)
-            .addGap(0, 462, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane9))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 84, Short.MAX_VALUE)
-            .addGap(0, 84, Short.MAX_VALUE)
             .addGap(0, 84, Short.MAX_VALUE)
             .addGap(0, 84, Short.MAX_VALUE)
             .addGap(0, 84, Short.MAX_VALUE)
@@ -460,16 +443,12 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
             .addGap(0, 462, Short.MAX_VALUE)
             .addGap(0, 462, Short.MAX_VALUE)
             .addGap(0, 462, Short.MAX_VALUE)
-            .addGap(0, 462, Short.MAX_VALUE)
-            .addGap(0, 462, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane10))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 84, Short.MAX_VALUE)
-            .addGap(0, 84, Short.MAX_VALUE)
             .addGap(0, 84, Short.MAX_VALUE)
             .addGap(0, 84, Short.MAX_VALUE)
             .addGap(0, 84, Short.MAX_VALUE)
@@ -518,7 +497,7 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -528,19 +507,22 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        /*
+        
         Vector<Vector> dataVector = ((MyTableModel)this.jTable1.getModel()).getDataVector();
         double[][] decisionMatrix = new double[dataVector.size()][dataVector.get(0).size()-1];
         int i = 0;
         for (Vector row : dataVector) {
             for (int j = 1; j < row.size(); j++) {
                 double v = Double.parseDouble((String)row.get(j));
-                decisionMatrix[i][j-1] = (this.atributos.get(j).isPositivo)?v:v*-1;
+                decisionMatrix[i][j-1] = (this.atributos.get(j-1).isPositivo())?v:v*-1;
             }
             i++;
         }
-         * */
-
+         
+         
+        
+        
+        /*
         this.atributos = new ArrayList<Atributo>();
         atributos.add(new Atributo("VAN",true,0.25));
         atributos.add(new Atributo("TIR",true,0.25));
@@ -548,7 +530,7 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
         atributos.add(new Atributo("VENTAS",true,0.1));
         atributos.add(new Atributo("IMPACTO AMBIENTAL",false,0.2));
         double[][] decisionMatrix = new double[][]{{100,15,7,40,-50},{200,25,7,60,-200},{100,20,4,25,-25},{200,30,20,70,-350},{250,25,15,100,-500}};
-        
+        */
         ConcordanceMatrixProcessor concordanceMatrixProcessor = new ConcordanceMatrixProcessor(this.atributos);
         double[][] concordanceMatrix = concordanceMatrixProcessor.process(decisionMatrix);
         double[][] normalizedDecisionMatrix = DecisionMatrixProcessor.normalize(decisionMatrix);
@@ -585,9 +567,13 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
         if (td.isEdited()) {
             if (td.getjRadioButton2().isSelected()) {
                 this.concordanceThreshold = (Double)td.getjSpinner1().getValue();
+            }else {
+                this.concordanceThreshold = 0.0;
             }
             if (td.getjRadioButton6().isSelected()) {
                 this.discordanceThreshold = (Double)td.getjSpinner2().getValue();
+            }else{
+                this.discordanceThreshold = 0.0;
             }
         }
 

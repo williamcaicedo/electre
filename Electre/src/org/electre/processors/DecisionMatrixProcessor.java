@@ -21,10 +21,10 @@ public class DecisionMatrixProcessor extends AbstractMatrixProcessor{
 
     public static double[][] normalize(double[][] m) {
         double[][] n = new double[m.length][m[0].length];
-        for (int i = 0; i < m.length; i++) {
+        for (int i = 0; i < m[0].length; i++) {
             double min = m[0][i];
             double max = min;
-            for (int j = 0; j < m[0].length; j++) {
+            for (int j = 0; j < m.length; j++) {
                 if (m[j][i] > max) {
                     max = m[j][i];
                 }
@@ -32,7 +32,7 @@ public class DecisionMatrixProcessor extends AbstractMatrixProcessor{
                     min = m[j][i];
                 }
             }
-             for (int j = 0; j < m[0].length; j++) {
+             for (int j = 0; j < m.length; j++) {
                  n[j][i] = m[j][i]/(max-min);
              }
         }

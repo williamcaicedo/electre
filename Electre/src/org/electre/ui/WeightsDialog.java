@@ -12,6 +12,7 @@
 package org.electre.ui;
 
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.List;
 import javax.swing.JComboBox;
@@ -32,6 +33,7 @@ public class WeightsDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.atributos = atributos;
+        this.jPanel2.setLayout(new GridBagLayout());
         this.populatePanel();
     }
 
@@ -136,11 +138,13 @@ public class WeightsDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.updateAtributos();
         this.edited = true;
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         this.edited = false;
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -148,17 +152,21 @@ public class WeightsDialog extends javax.swing.JDialog {
     */
     
     private void updateAtributos() {
+        int j = 0;
         for (int i = 0; i < this.atributos.size(); i++) {
-            this.atributos.get(i).setNombre(((JTextField)jPanel2.getComponent(i)).getText());
-            this.atributos.get(i).setPeso((Double)((JSpinner)jPanel2.getComponent(i)).getValue());
-            int comboIndex = ((JComboBox)jPanel2.getComponent(i)).getSelectedIndex();
+            this.atributos.get(i).setNombre(((JTextField)jPanel2.getComponent(j)).getText());
+            this.atributos.get(i).setPeso((Double)((JSpinner)jPanel2.getComponent(j+2)).getValue());
+            int comboIndex = ((JComboBox)jPanel2.getComponent(j+1)).getSelectedIndex();
             this.atributos.get(i).setPositivo((comboIndex == 0)?true:false);
+            j += 3;
         }
     }
     private void populatePanel() {
         for(Atributo atributo : this.atributos) {
             this.addComponents(atributo.getPeso(),(atributo.isPositivo())?0:1, atributo.getNombre());
         }
+        this.jPanel2.revalidate();
+        this.jPanel2.repaint();
     }
     private void addComponents(double weight, int comboIndex, String name) {
         GridBagConstraints c = new GridBagConstraints();
