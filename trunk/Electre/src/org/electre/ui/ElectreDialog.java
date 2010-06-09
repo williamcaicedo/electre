@@ -61,6 +61,7 @@ public class ElectreDialog extends javax.swing.JDialog {
         finishButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle(org.openide.util.NbBundle.getMessage(ElectreDialog.class, "ElectreDialog.title")); // NOI18N
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -174,10 +175,10 @@ public class ElectreDialog extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(finishButton)
-                .addContainerGap())
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -197,7 +198,7 @@ public class ElectreDialog extends javax.swing.JDialog {
                     name = ((JTextField)c).getText();
                 }else{
                     if (c instanceof JComboBox) {
-                        positivo = ((JComboBox)c).getSelectedItem().equals("Mayor es mejor");
+                        positivo = ((JComboBox)c).getSelectedItem().equals("mayor es mejor");
                     }else{
                         double weight = (Double)((JSpinner)c).getValue();
                         atributos.add(new Atributo(name,positivo,weight));
