@@ -15,12 +15,16 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import org.electre.core.Atributo;
 import org.electre.utils.MyTableModel;
 
@@ -58,6 +62,8 @@ public class ElectreDialog extends javax.swing.JDialog {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel6 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         finishButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -115,6 +121,10 @@ public class ElectreDialog extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        jLabel3.setText(org.openide.util.NbBundle.getMessage(ElectreDialog.class, "ElectreDialog.jLabel3.text")); // NOI18N
+
+        jLabel4.setText(org.openide.util.NbBundle.getMessage(ElectreDialog.class, "ElectreDialog.jLabel4.text")); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -132,6 +142,12 @@ public class ElectreDialog extends javax.swing.JDialog {
                             .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(276, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(47, 47, 47)
+                .addComponent(jLabel4)
+                .addGap(77, 77, 77))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,10 +162,14 @@ public class ElectreDialog extends javax.swing.JDialog {
                     .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addGap(49, 49, 49))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 440, 350));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 440, 390));
 
         finishButton.setText(org.openide.util.NbBundle.getMessage(ElectreDialog.class, "ElectreDialog.finishButton.text")); // NOI18N
         finishButton.addActionListener(new java.awt.event.ActionListener() {
@@ -162,23 +182,23 @@ public class ElectreDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(379, Short.MAX_VALUE)
                 .addComponent(finishButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(finishButton)
-                .addGap(20, 20, 20))
+                .addContainerGap())
         );
 
         pack();
@@ -186,44 +206,49 @@ public class ElectreDialog extends javax.swing.JDialog {
 
     private void finishButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishButtonActionPerformed
         // TODO add your handling code here:
-        atributos = new ArrayList<Atributo>();
-        tableModel = new MyTableModel();
-        //int i = 1;
-        tableModel.addColumn("Alternativas");
-        String name = "";
-        boolean positivo = false;
-        for (Component c : jPanel6.getComponents()) {
-                if (c instanceof JTextField) {
-                    tableModel.addColumn(((JTextField)c).getText());
-                    name = ((JTextField)c).getText();
-                }else{
-                    if (c instanceof JComboBox) {
-                        positivo = ((JComboBox)c).getSelectedItem().equals("mayor es mejor");
-                    }else{
-                        double weight = (Double)((JSpinner)c).getValue();
-                        atributos.add(new Atributo(name,positivo,weight));
-                    }
-                    
-                }
-        }
-
-        for (int i = 0; i < (Integer)jSpinner1.getValue(); i++) {
-            Vector v = new Vector();
-            int j = 0;
+        Long total = this.updateTotal();
+        if (total == 1) {
+            atributos = new ArrayList<Atributo>();
+            tableModel = new MyTableModel();
+            //int i = 1;
+            tableModel.addColumn("Alternativas");
+            String name = "";
+            boolean positivo = false;
             for (Component c : jPanel6.getComponents()) {
-                 if (j==0) {
-                     v.add(i+1);
-                 }else{
-                     v.add("");
-                 }
-                 j++;
-            }
-            tableModel.addRow(v);
+                    if (c instanceof JTextField) {
+                        tableModel.addColumn(((JTextField)c).getText());
+                        name = ((JTextField)c).getText();
+                    }else{
+                        if (c instanceof JComboBox) {
+                            positivo = ((JComboBox)c).getSelectedItem().equals("mayor es mejor");
+                        }else{
+                            double weight = (Double)((JSpinner)c).getValue();
+                            atributos.add(new Atributo(name,positivo,weight));
+                        }
 
+                    }
+            }
+
+            for (int i = 0; i < (Integer)jSpinner1.getValue(); i++) {
+                Vector v = new Vector();
+                int j = 0;
+                for (Component c : jPanel6.getComponents()) {
+                     if (j==0) {
+                         v.add(i+1);
+                     }else{
+                         v.add("");
+                     }
+                     j++;
+                }
+                tableModel.addRow(v);
+
+            }
+            //this.tableModel = model;
+            //this.atributos = atributos;
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "La suma de las ponderaciones debe ser de 1", "Error",0);
         }
-        //this.tableModel = model;
-        //this.atributos = atributos;
-        this.dispose();
     }//GEN-LAST:event_finishButtonActionPerformed
 
     private void jSpinner2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner2StateChanged
@@ -239,7 +264,7 @@ public class ElectreDialog extends javax.swing.JDialog {
         }
         this.jPanel6.revalidate();
         this.jPanel6.repaint();
-
+        this.updateTotal();
     }//GEN-LAST:event_jSpinner2StateChanged
 
      private void addComponents() {
@@ -258,7 +283,25 @@ public class ElectreDialog extends javax.swing.JDialog {
         c.gridx = 2;
         JSpinner spinner = new JSpinner();
         spinner.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(0.1), Double.valueOf(0.01), Double.valueOf(1), Double.valueOf(0.01)));
+        spinner.addChangeListener(new ChangeListener() {
+
+            public void stateChanged(ChangeEvent e) {
+                ElectreDialog.this.updateTotal();
+            }
+
+        });
         this.jPanel6.add(spinner, c);
+    }
+    private Long updateTotal() {
+        Double aux = 0.0;
+         for (Component c : jPanel6.getComponents()) {
+                if (c instanceof JSpinner) {
+                    aux += (Double)((JSpinner)c).getValue();
+                }
+        }
+        DecimalFormat cf = new DecimalFormat("#.####");
+        this.jLabel4.setText(cf.format(aux));
+        return Math.round(aux);
     }
 
     public MyTableModel getTableModel() {
@@ -290,6 +333,8 @@ public class ElectreDialog extends javax.swing.JDialog {
     private javax.swing.JButton finishButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
@@ -298,5 +343,7 @@ public class ElectreDialog extends javax.swing.JDialog {
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
     // End of variables declaration//GEN-END:variables
+
+
 
 }
