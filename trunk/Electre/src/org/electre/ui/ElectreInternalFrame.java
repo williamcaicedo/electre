@@ -11,9 +11,9 @@
 
 package org.electre.ui;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import org.electre.core.Atributo;
 import org.electre.processors.AggregatedDominanceMatrixProcessor;
@@ -24,9 +24,11 @@ import org.electre.processors.DiscordanceMatrixProcessor;
 import org.electre.processors.DiscordantDominanceMatrixProcessor;
 import org.electre.utils.ConcordanceComparator;
 import org.electre.utils.DiscordanceComparator;
+import org.electre.utils.ElectreFileFilter;
 import org.electre.utils.GraphSceneImpl;
 import org.electre.utils.MyTableModel;
 import org.electre.utils.TableUtils;
+import org.electre.utils.XmlUtils;
 
 /**
  *
@@ -44,6 +46,8 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
         initComponents();
         this.concordanceThreshold = 0.0;
         this.discordanceThreshold = 0.0;
+         jTabbedPane1.setEnabledAt(1,false);
+         jTabbedPane1.setEnabledAt(2,false);
     }
 
     public void setModel(MyTableModel model) {
@@ -72,6 +76,8 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -98,6 +104,8 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
         jScrollPane10 = new javax.swing.JScrollPane();
         jTable9 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -143,7 +151,7 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(69, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
@@ -154,20 +162,27 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(ElectreInternalFrame.class, "ElectreInternalFrame.jScrollPane2.border.title"))); // NOI18N
 
+        jScrollPane11.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(ElectreInternalFrame.class, "ElectreInternalFrame.jScrollPane11.border.title"))); // NOI18N
+        jScrollPane11.setViewportView(jTextPane1);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 928, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 928, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 928, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -202,7 +217,7 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel4);
@@ -234,7 +249,7 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel5);
@@ -266,7 +281,7 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel6);
@@ -290,17 +305,15 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 462, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane6))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 84, Short.MAX_VALUE)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel7);
@@ -325,18 +338,16 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 462, Short.MAX_VALUE)
-            .addGap(0, 462, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane7))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 84, Short.MAX_VALUE)
-            .addGap(0, 84, Short.MAX_VALUE)
+            .addGap(0, 95, Short.MAX_VALUE)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel8);
@@ -362,19 +373,17 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 462, Short.MAX_VALUE)
             .addGap(0, 462, Short.MAX_VALUE)
-            .addGap(0, 462, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane8))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 84, Short.MAX_VALUE)
-            .addGap(0, 84, Short.MAX_VALUE)
-            .addGap(0, 84, Short.MAX_VALUE)
+            .addGap(0, 95, Short.MAX_VALUE)
+            .addGap(0, 95, Short.MAX_VALUE)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel9);
@@ -401,20 +410,18 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
             .addGap(0, 462, Short.MAX_VALUE)
             .addGap(0, 462, Short.MAX_VALUE)
             .addGap(0, 462, Short.MAX_VALUE)
-            .addGap(0, 462, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane9))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 84, Short.MAX_VALUE)
-            .addGap(0, 84, Short.MAX_VALUE)
-            .addGap(0, 84, Short.MAX_VALUE)
-            .addGap(0, 84, Short.MAX_VALUE)
+            .addGap(0, 95, Short.MAX_VALUE)
+            .addGap(0, 95, Short.MAX_VALUE)
+            .addGap(0, 95, Short.MAX_VALUE)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel10);
@@ -442,26 +449,36 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
             .addGap(0, 462, Short.MAX_VALUE)
             .addGap(0, 462, Short.MAX_VALUE)
             .addGap(0, 462, Short.MAX_VALUE)
-            .addGap(0, 462, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane10))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 84, Short.MAX_VALUE)
-            .addGap(0, 84, Short.MAX_VALUE)
-            .addGap(0, 84, Short.MAX_VALUE)
-            .addGap(0, 84, Short.MAX_VALUE)
-            .addGap(0, 84, Short.MAX_VALUE)
+            .addGap(0, 95, Short.MAX_VALUE)
+            .addGap(0, 95, Short.MAX_VALUE)
+            .addGap(0, 95, Short.MAX_VALUE)
+            .addGap(0, 95, Short.MAX_VALUE)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jPanel3.add(jPanel11);
 
         jTabbedPane1.addTab(org.openide.util.NbBundle.getMessage(ElectreInternalFrame.class, "ElectreInternalFrame.jPanel3.TabConstraints.tabTitle"), jPanel3); // NOI18N
+
+        jMenu2.setText(org.openide.util.NbBundle.getMessage(ElectreInternalFrame.class, "ElectreInternalFrame.jMenu2.text")); // NOI18N
+
+        jMenuItem3.setText(org.openide.util.NbBundle.getMessage(ElectreInternalFrame.class, "ElectreInternalFrame.jMenuItem3.text")); // NOI18N
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu2);
 
         jMenu1.setText(org.openide.util.NbBundle.getMessage(ElectreInternalFrame.class, "ElectreInternalFrame.jMenu1.text")); // NOI18N
 
@@ -496,18 +513,16 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
+    private void process() {
         Vector<Vector> dataVector = ((MyTableModel)this.jTable1.getModel()).getDataVector();
         double[][] decisionMatrix = new double[dataVector.size()][dataVector.get(0).size()-1];
         int i = 0;
@@ -518,10 +533,11 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
             }
             i++;
         }
-         
-         
-        
-        
+
+
+
+
+
         /*
         this.atributos = new ArrayList<Atributo>();
         atributos.add(new Atributo("VAN",true,0.25));
@@ -546,6 +562,9 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
         GraphSceneImpl graphScene = new GraphSceneImpl();
         jScrollPane2.setViewportView(graphScene.createView());
         graphScene.paintElectreGraph(aggregatedDominanceMatrix);
+        this.jTextPane1.setText(aggregatedDominanceMatrixProcessor.getMatrixAnalysisText());
+        jTabbedPane1.setEnabledAt(1,true);
+        jTabbedPane1.setEnabledAt(2,true);
         jTabbedPane1.setSelectedIndex(1);
 
         this.jTable2.setModel(TableUtils.arrayToDefaultTableModel(decisionMatrix));
@@ -556,6 +575,11 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
         this.jTable7.setModel(TableUtils.arrayToDefaultTableModel(concordantDominanceMatrix));
         this.jTable8.setModel(TableUtils.arrayToDefaultTableModel(discordantDominanceMatrix));
         this.jTable9.setModel(TableUtils.arrayToDefaultTableModel(aggregatedDominanceMatrix));
+    }
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        process();
+        
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -563,6 +587,19 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         ThresholdDialog td = new ThresholdDialog((JFrame)this.getParent().getParent().getParent().getParent().getParent(),true);
+        if (this.concordanceThreshold != 0.0) {
+            td.getjSpinner1().setValue(this.concordanceThreshold);
+            td.getjRadioButton2().setSelected(true);
+            td.getjSpinner1().setEnabled(true);
+
+
+        }
+        if (this.discordanceThreshold != 0.0) {
+            td.getjSpinner2().setValue(this.discordanceThreshold);
+            td.getjRadioButton6().setSelected(true);
+            td.getjSpinner2().setEnabled(true);
+        }
+
         td.setVisible(true);
         if (td.isEdited()) {
             if (td.getjRadioButton2().isSelected()) {
@@ -575,6 +612,7 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
             }else{
                 this.discordanceThreshold = 0.0;
             }
+            process();
         }
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
@@ -585,17 +623,30 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
         wd.setVisible(true);
         if (wd.isEdited()) {
             this.atributos = wd.getAtributos();
+            process();
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser jc = new JFileChooser();
+        jc.setFileFilter(new ElectreFileFilter());
+        int c = jc.showSaveDialog(this);
+        if (c == JFileChooser.APPROVE_OPTION) {
+            XmlUtils.programToXML(this.model,this.atributos,jc.getSelectedFile().getPath());
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -609,6 +660,7 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -627,6 +679,7 @@ public class ElectreInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable7;
     private javax.swing.JTable jTable8;
     private javax.swing.JTable jTable9;
+    private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 
 }

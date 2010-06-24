@@ -25,6 +25,7 @@ public class ThresholdDialog extends javax.swing.JDialog {
     public ThresholdDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
     }
 
     /** This method is called from within the constructor to
@@ -57,6 +58,11 @@ public class ThresholdDialog extends javax.swing.JDialog {
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setSelected(true);
         jRadioButton1.setText(org.openide.util.NbBundle.getMessage(ThresholdDialog.class, "ThresholdDialog.jRadioButton1.text")); // NOI18N
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText(org.openide.util.NbBundle.getMessage(ThresholdDialog.class, "ThresholdDialog.jRadioButton2.text")); // NOI18N
@@ -99,6 +105,11 @@ public class ThresholdDialog extends javax.swing.JDialog {
         buttonGroup2.add(jRadioButton5);
         jRadioButton5.setSelected(true);
         jRadioButton5.setText(org.openide.util.NbBundle.getMessage(ThresholdDialog.class, "ThresholdDialog.jRadioButton5.text")); // NOI18N
+        jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton5ActionPerformed(evt);
+            }
+        });
 
         buttonGroup2.add(jRadioButton6);
         jRadioButton6.setText(org.openide.util.NbBundle.getMessage(ThresholdDialog.class, "ThresholdDialog.jRadioButton6.text")); // NOI18N
@@ -186,12 +197,12 @@ public class ThresholdDialog extends javax.swing.JDialog {
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
-        this.jSpinner1.setEnabled(this.jRadioButton2.isEnabled());
+        this.jSpinner1.setEnabled(this.jRadioButton2.isSelected());
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6ActionPerformed
         // TODO add your handling code here:
-        this.jSpinner2.setEnabled(this.jRadioButton6.isEnabled());
+        this.jSpinner2.setEnabled(this.jRadioButton6.isSelected());
     }//GEN-LAST:event_jRadioButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -222,6 +233,16 @@ public class ThresholdDialog extends javax.swing.JDialog {
         return jSpinner2;
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+        this.jSpinner1.setEnabled(this.jRadioButton2.isSelected());
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
+        // TODO add your handling code here:
+        this.jSpinner1.setEnabled(this.jRadioButton6.isSelected());
+    }//GEN-LAST:event_jRadioButton5ActionPerformed
+
     public boolean isEdited() {
         return edited;
     }
@@ -249,12 +270,9 @@ public class ThresholdDialog extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JSpinner jSpinner1;
