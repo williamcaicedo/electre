@@ -12,9 +12,19 @@
 package org.electre.ui;
 
 import java.awt.Frame;
+import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import org.electre.core.Atributo;
+import org.electre.utils.ElectreFileFilter;
+import org.electre.utils.ElectreSAXHandler;
 import org.electre.utils.MyTableModel;
+import org.xml.sax.InputSource;
 
 /**
  *
@@ -41,6 +51,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -64,6 +75,14 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText(org.openide.util.NbBundle.getMessage(MainFrame.class, "MainFrame.jMenuItem2.text")); // NOI18N
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
 
@@ -109,6 +128,42 @@ public class MainFrame extends javax.swing.JFrame {
         frame.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser jc = new JFileChooser();
+        jc.setFileFilter(new ElectreFileFilter());
+        int c = jc.showOpenDialog(this);
+        if (c == JFileChooser.APPROVE_OPTION) {
+            SAXParserFactory spf = SAXParserFactory.newInstance();
+            try {
+                spf.setValidating(false);
+                SAXParser sp = spf.newSAXParser();
+                InputSource input = new InputSource(new FileReader(jc.getSelectedFile()));
+                ElectreSAXHandler handler = new ElectreSAXHandler();
+                sp.parse(input, handler);
+                ElectreInternalFrame frame = new ElectreInternalFrame();
+                ArrayList<Atributo> atribs = (ArrayList<Atributo>) handler.getAttributes();
+                frame.setAtributos(atribs);
+                Vector<String> columnNames = new Vector<String>();
+                columnNames.add("Alternativas");
+                for (Atributo a :atribs) {
+                    columnNames.add(a.getNombre());
+                }
+                MyTableModel m = new MyTableModel();
+                m.setDataVector(handler.getMatrix(), columnNames);
+                frame.setModel(m);
+                this.jDesktopPane1.add(frame);
+                //frame.process();
+                frame.setVisible(true);
+            }catch(Exception e){
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error al intentar abrir archivo", "Error",0);}
+
+
+
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -126,6 +181,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
 
 }

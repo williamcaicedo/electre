@@ -15,6 +15,7 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -206,8 +207,12 @@ public class ElectreDialog extends javax.swing.JDialog {
 
     private void finishButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishButtonActionPerformed
         // TODO add your handling code here:
-        Long total = this.updateTotal();
-        if (total == 1) {
+        /*
+        BigDecimal total = this.updateTotal();
+        total = total.setScale(4,BigDecimal.ROUND_DOWN);
+        if (total.doubleValue() == 1d) {
+         *
+         */
             atributos = new ArrayList<Atributo>();
             tableModel = new MyTableModel();
             //int i = 1;
@@ -246,9 +251,11 @@ public class ElectreDialog extends javax.swing.JDialog {
             //this.tableModel = model;
             //this.atributos = atributos;
             this.dispose();
-        }else{
+        /*}else{
             JOptionPane.showMessageDialog(this, "La suma de las ponderaciones debe ser de 1", "Error",0);
         }
+         *
+         */
     }//GEN-LAST:event_finishButtonActionPerformed
 
     private void jSpinner2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner2StateChanged
@@ -292,16 +299,16 @@ public class ElectreDialog extends javax.swing.JDialog {
         });
         this.jPanel6.add(spinner, c);
     }
-    private Long updateTotal() {
-        Double aux = 0.0;
+    private BigDecimal updateTotal() {
+        BigDecimal aux = BigDecimal.ZERO;
          for (Component c : jPanel6.getComponents()) {
                 if (c instanceof JSpinner) {
-                    aux += (Double)((JSpinner)c).getValue();
+                    aux = aux.add(new BigDecimal((Double)((JSpinner)c).getValue()).setScale(4,BigDecimal.ROUND_DOWN));
                 }
         }
         DecimalFormat cf = new DecimalFormat("#.####");
         this.jLabel4.setText(cf.format(aux));
-        return Math.round(aux);
+        return aux;
     }
 
     public MyTableModel getTableModel() {

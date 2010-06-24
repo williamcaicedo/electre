@@ -5,6 +5,7 @@
 
 package org.electre.utils;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -26,6 +27,7 @@ import org.netbeans.api.visual.widget.Widget;
 public class GraphSceneImpl extends GraphScene {
     private LayerWidget mainLayer;
     private LayerWidget connectionLayer;
+    private boolean isDominated;
     //private Image nodeImage;
 
 
@@ -82,7 +84,13 @@ public class GraphSceneImpl extends GraphScene {
     */
 
     public void paintElectreGraph (double[][] matrix) {
+        //boolean isDominated;
         for (int i =0; i< matrix.length; i++) {
+            this.isDominated = false;
+            for (int j =0; j< matrix.length; j++) {
+                if (matrix[j][i] == 1)
+                    this.isDominated = true;
+            }
             this.addNode(Integer.valueOf(i)+ 1);
         }
         List<Widget> widgets = this.mainLayer.getChildren();
@@ -106,14 +114,14 @@ public class GraphSceneImpl extends GraphScene {
     @Override
     protected Widget attachNodeWidget(Object node) {
         Integer index = (Integer)node;
-        CircleWidget widget = new CircleWidget(this,20,index.toString());
+        CircleWidget widget = new CircleWidget(this,20,index.toString(),(isDominated)?null:Color.decode("0xCCCCCC"));
         //widget.setImage(GraphUtils.getNodeImage(index.toString()));
         //widget.setLabel(Long.toString(node.hashCode()));
         //widget.getActions().addAction(ActionFactory.createExtendedConnectAction(this.connectionLayer, new MyConnectProvider()));
         widget.getActions().addAction(ActionFactory.createMoveAction());
         //Integer col = 200*(index/3) + 10;
-        double area = this.getView().getWidth();
-        double area2 = this.getView().getHeight();
+        //double area = this.getView().getWidth();
+        //double area2 = this.getView().getHeight();
         int col = (int) Math.round(Math.random()*300);
         int row = (int) Math.round(Math.random()*600);
         widget.setPreferredLocation(new Point(row,col));
@@ -139,10 +147,12 @@ public class GraphSceneImpl extends GraphScene {
     private class CircleWidget extends Widget {
         private int r;
         private String label;
-        public CircleWidget (Scene scene, int radius, String label) {
+        private Color color;
+        public CircleWidget (Scene scene, int radius, String label, Color color) {
             super (scene);
             r = radius;
             this.label = label;
+            this.color = color;
         }
         @Override
         protected Rectangle calculateClientArea () {
@@ -151,13 +161,41 @@ public class GraphSceneImpl extends GraphScene {
         @Override
         protected void paintWidget () {
             Graphics2D g = getGraphics ();
-            g.setColor (getForeground ());
-            g.drawOval (- r, - r, 2 * r, 2 * r);
+            if (color != null) {
+                g.setColor (this.color);
+                g.fillOval (- r, - r, 2 * r, 2 * r);
+            }else{
+                g.setColor(getForeground());
+                g.drawOval (- r, - r, 2 * r, 2 * r);
+            }
+            if (color != null)
+                g.setColor(getForeground());
             g.drawString(label, r/70, r/5);
         }
     }
 
-   
+    private class KernelWidget extends Widget {
+        private int w;
+        private int h;
+
+        public KernelWidget (Scene scene, int width, int height) {
+            super (scene);
+            w = width;
+            h = height;
+
+        }
+        @Override
+        protected Rectangle calculateClientArea () {
+            return new Rectangle (- w, - h, 2 * w + 1, 2 * h + 1);
+        }
+        @Override
+        protected void paintWidget () {
+            Graphics2D g = getGraphics ();
+            g.setColor (getForeground ());
+            g.drawRect(- w, - h, 2 * w, 2 * h);
+            g.drawString("Núcleo",-w ,-h);
+        }
+    }
 
 
 

@@ -15,7 +15,7 @@ public class DiscordanceMatrixProcessor extends AbstractThresholdMatrixProcessor
     public double[][] process(double[][] m) {
         double max = 0;
         double max2 = 0;
-        double[][] discordanceMatrix = new double[m.length][m[0].length];
+        double[][] discordanceMatrix = new double[m.length][m.length];
         for (int i = 0; i < m.length;i++) {
             for (int j = 0; j < m.length;j++) {
                 max = 0;
